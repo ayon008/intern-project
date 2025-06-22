@@ -3,7 +3,7 @@ import React from 'react';
 
 const page = async ({ params }) => {
     const { id } = await params;
-    const req = await fetch(`http://localhost:3000/api/items/${id}`)
+    const req = await fetch(`https://intern-project-ashy.vercel.app/api/items/${id}`)
     const singleProduct = await req.json()
     console.log(singleProduct);
     return (

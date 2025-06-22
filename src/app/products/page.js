@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 const page = async () => {
-    const req = await fetch('http://localhost:3000/api/items');
+    const req = await fetch('https://intern-project-ashy.vercel.app/api/items');
     const data = await req.json();
 
     return (
