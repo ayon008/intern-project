@@ -14,11 +14,12 @@ import {
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from '@/components/ui/button';
+import { useRouter } from 'next/navigation';
 
 const Page = () => {
   const { register, handleSubmit, setValue, watch, reset, setError,
     clearErrors, formState: { errors }, } = useForm();
-
+  const router = useRouter()
   const uploadToImgBB = async (file) => {
     const apiKey = "9a38563b80c5197bc652b9f720cb5b06"; // your API key
 
@@ -41,6 +42,18 @@ const Page = () => {
 
   const onSubmit = async (data) => {
     try {
+
+      await Swal.fire({
+        title: 'Loading...',
+        didOpen: () => {
+          Swal.showLoading();
+        },
+        allowOutsideClick: false,
+        allowEscapeKey: false,
+        allowEnterKey: false,
+        showConfirmButton: false,
+      });
+
       // Extract images
       const coverImageFile = data.coverImage?.[0];
       const additionalImageFiles = Array.from(data.additionalImages || []).slice(0, 3);
@@ -76,6 +89,7 @@ const Page = () => {
       });
 
       reset(); // reset form after successful submit
+      router.push('/product')
 
     } catch (error) {
       console.error("Upload Error:", error);
